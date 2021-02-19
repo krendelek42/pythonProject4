@@ -3,7 +3,7 @@ Developers:
 Dokukina K. (%), Nazirova E. (%), Egorov E. (%).
 
 """
-
+from translate import Translator
 text = input("Введите текст:")
 from textblob import TextBlob #чтобы установить TextBlob вставите в терминал (он находится если что внизу пайчарма) это "pip install -U textblob" и (после того как он загрузится) это потом "python -m textblob.download_corpora"
 b = TextBlob(text)
@@ -28,6 +28,14 @@ if language == 'ru':
     FRE = 206.835 - (1.3 * ASL) - (60.1 * ASW)
 else:
     FRE = 206.835 - (1.015 * ASL) - (84.6 * ASW)
+sentiment, subjectivity = b.sentiment if language == "en" else b.translate(to="en").sentiment
+if b.sentiment.polarity > 0.5:
+    sentiment = 'положительный'
+elif b.sentiment.polarity < -0.5:
+    sentiment = 'отрицательный'
+else:
+    sentiment = 'нейтральный'
+subjectivity = subjectivity * 100
 # сюда напишите свою часть работы
 # сначала про удобночитаемость потом про тональность. Ниже добавите print, следуя последовательности работы
 print ('Предложений:',count_sentens)
@@ -36,6 +44,8 @@ print ('Слогов:',count_syllables)
 print ('Средняя длина предложения в словах:',ASL)
 print ('Средняя длина слова в слогах:',ASW)
 print ('Индекс удобочитаемости Флеша:',FRE)
+print('Тональность текста: ', sentiment)
+print('Объективность: ', "%.1f" % subjectivity, '%', sep='')
  # В общем, осталось дописать, чтобы после выявления индекса удобночитаемости Флеша, он выводил че за текст
  #  (легко читается, средне, трудно). Это есть в примере работы у Минака. Индекс расположен в диапазоне 0 - 100
  # Минак делит на 4 части диапазон, текста, какие нужно писать, есть в "описании предметной области"
