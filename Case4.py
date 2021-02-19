@@ -28,14 +28,14 @@ if language == 'ru':
     FRE = 206.835 - (1.3 * ASL) - (60.1 * ASW)
 else:
     FRE = 206.835 - (1.015 * ASL) - (84.6 * ASW)
-sentiment, subjectivity = b.sentiment if language == "en" else b.translate(to="en").sentiment
+sentiment, subjectivity = b.sentiment if language == "en" else b.translate(to="en").sentiment                           #calculating sentiment and subjectivity
 if b.sentiment.polarity > 0.5:
     sentiment = 'положительный'
 elif b.sentiment.polarity < -0.5:
     sentiment = 'отрицательный'
 else:
     sentiment = 'нейтральный'
-subjectivity = subjectivity * 100
+subjectivity = subjectivity * 100                                                                                       #subjectivity to percents
 # сюда напишите свою часть работы
 # сначала про удобночитаемость потом про тональность. Ниже добавите print, следуя последовательности работы
 print ('Предложений:',count_sentens)
