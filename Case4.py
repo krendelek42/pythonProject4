@@ -29,15 +29,6 @@ if language == 'ru':
 else:
     FRE = 206.835 - (1.015 * ASL) - (84.6 * ASW)
 
-if FRE> 80:
-    print('Текст очень легко читается (для младших школьников).')
-if FRE>50 and FRE< 80:
-    print('Простой текст (для школьников).')
-if FRE>25 and FRE< 50:
-    print('Текст немного трудно читать (для студентов).')
-if FRE<25 :
-    print('Текст трудно читается (для выпускников ВУЗов).')
-
 sentiment, subjectivity = b.sentiment if language == "en" else b.translate(to="en").sentiment                          
 if b.sentiment.polarity > 0.5:
     sentiment = 'положительный'
@@ -53,5 +44,15 @@ print ('Слогов:',count_syllables)
 print ('Средняя длина предложения в словах:',ASL)
 print ('Средняя длина слова в слогах:',ASW)
 print ('Индекс удобочитаемости Флеша:',FRE)
+
+if FRE> 80:
+    print('Текст очень легко читается (для младших школьников).')
+if FRE>50 and FRE< 80:
+    print('Простой текст (для школьников).')
+if FRE>25 and FRE< 50:
+    print('Текст немного трудно читать (для студентов).')
+if FRE<25 :
+    print('Текст трудно читается (для выпускников ВУЗов).')
+
 print('Тональность текста: ', sentiment)
 print('Объективность: ', "%.1f" % subjectivity, '%', sep='')
